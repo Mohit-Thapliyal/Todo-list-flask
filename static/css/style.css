@@ -1,0 +1,13 @@
+body {
+  background-color: #d8f3dc;
+}
+@media (max-width: 992px) {
+  .margin-top {
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 992px) {
+  .navbar-margin-top {
+    margin-top: 0.3rem;
+  }
+}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+<!-- ----Form---- -->
+<div class="container my-4">
+  <h1>Add a Todo</h1>
+  <form action="/" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">Todo Title</label>
+      <input type="text" class="form-control" name="title" id="title">
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">Todo Description</label>
+      <input type="text" class="form-control" name="desc" id="desc">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+<div class="container"><hr></div>
+
+
+<!-- ----Table---- -->
+<div class="container table-responsive-sm">
+  <h2>Your Todos</h2>
+  <table class="table table-striped">
+    {% if allTodo|length==0 %}
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+      </symbol>
+    </svg>
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+        <use xlink:href="#exclamation-triangle-fill" />
+      </svg>
+      <div>
+        No Data Found!!! Submit some values....
+      </div>
+    </div>
+    {% else %}
+    <thead>
+      <tr>
+        <th scope="col">SNo</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Time</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for Todo in allTodo %}
+      <tr class="my-1">
+        <th scope="row">{{loop.index}}</th>
+        <td>{{Todo.title}}</td>
+        <td>{{Todo.desc}}</td>
+        <td>{{Todo.date_created}}</td>
+        <td><a href="/update/{{Todo.sno}}" type="button" class="btn btn-outline-success">Update</a>
+          <a href="/delete/{{Todo.sno}}" type="button" class="btn btn-danger mx-1 margin-top">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}
